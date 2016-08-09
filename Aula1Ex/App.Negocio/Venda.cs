@@ -35,6 +35,10 @@ namespace App1.Negocio {
         public Cliente Cliente { get; set; }
         public Produto Produto { get; set; }
 
+        public String VerDadosVenda() {
+            return "O cliente " + Cliente.Nome + " comprou um " + Produto.Descricao + " pelo valor de R$ " + string.Format("{0:##.##}", Produto.Valor) + ", pagando de frete " + String.Format("{0:##.##}", ValorFrete) + ", totalizando R$ " + String.Format("{0:##.##}", ValorTotal);
+        }
+
         public Venda() {
             this.Codigo = 15;
             this.DataHora = DateTime.Now;

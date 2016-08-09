@@ -32,10 +32,10 @@ namespace App1.ConsoleApp {
             v2.Produto = p2;
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("O cliente "+v1.Cliente.Nome+" comprou um "+v1.Produto.Descricao + " pelo valor de R$ "+ String.Format("{0:##.##}", v1.Produto.Valor) + ", pagando de frete "+ String.Format("{0:##.##}", v1.ValorFrete) + ", totalizando R$ " +String.Format("{0:##.##}", v1.ValorTotal));
+            Console.WriteLine(v1.VerDadosVenda());
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("O cliente " + v2.Cliente.Nome + " comprou um " + v2.Produto.Descricao + " pelo valor de R$ " + String.Format("{0:#,###.##}", v2.Produto.Valor) + ", pagando de frete " + String.Format("{0:#,###.##}", v2.ValorFrete) + ", totalizando R$ " + String.Format("{0:#,###.##}", v2.ValorTotal));
+            Console.WriteLine(v2.VerDadosVenda());
 
             Console.ReadKey();
         }
