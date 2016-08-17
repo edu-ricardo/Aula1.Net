@@ -25,11 +25,11 @@ namespace App1.ConsoleApp {
 
             Venda v1 = new Venda();
             v1.Cliente = c1;
-            v1.Produto = p1;
+            v1.Produtos.Add(new Item { Produto= p1, Qtde = 1 });
 
             Venda v2 = new Venda();
             v2.Cliente = c2;
-            v2.Produto = p2;
+            v2.Produtos.Add(new Item { Produto = p2, Qtde = 2 });
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(v1.VerDadosVenda());

@@ -9,5 +9,6 @@ namespace App1.Negocio {
         public int Codigo { get; set; }
         public String Nome { get; set; }
         public String Telefone { get; set; }
+        public Endereco End { get; set; }
     }
 }

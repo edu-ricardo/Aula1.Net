@@ -7,8 +7,8 @@
     <ProjectGuid>{AB704213-8410-4DD5-809A-3AB424C5D544}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>App.Negocio</RootNamespace>
-    <AssemblyName>App.Negocio</AssemblyName>
+    <RootNamespace>App1.Negocio</RootNamespace>
+    <AssemblyName>App1.Negocio</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,8 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cliente.cs" />
+    <Compile Include="Endereco.cs" />
+    <Compile Include="Item.cs" />
     <Compile Include="Produto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Teste.cs" />
     <Compile Include="Venda.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
