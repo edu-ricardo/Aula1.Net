@@ -1,0 +1,38 @@
+﻿@model AulaViews.Models.Curso
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhe do curso @Model.Titulo</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col col-lg-3">
+            Codigo: @Model.Codigo <br />
+            Descrição: @Model.Descricao <br />
+        </div>
+        <div class="col col-lg-9">
+            <div class="col col-lg-7">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <td>Codigo</td>
+                            <td>Titulo</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var mod in Model.Modulos) {
+                            <tr>
+                                <td> @mod.Codigo </td>
+                                <td> @mod.Titulo </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
