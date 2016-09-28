@@ -14,8 +14,19 @@ namespace ModelFirst.Model
     
     public partial class Modulo
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Modulo()
+        {
+            this.Atividades = new HashSet<Atividade>();
+        }
+    
         public int Id { get; set; }
         public string Titulo { get; set; }
         public string Descricao { get; set; }
+        public int CursoId { get; set; }
+    
+        public virtual Curso Curso { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Atividade> Atividades { get; set; }
     }
 }

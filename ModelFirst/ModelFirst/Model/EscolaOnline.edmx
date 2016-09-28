@@ -9,6 +9,14 @@
     <EntitySet Name="Cursos" EntityType="EscolaOnline.Store.Cursos" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Modulos" EntityType="EscolaOnline.Store.Modulos" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Atividades" EntityType="EscolaOnline.Store.Atividades" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CursoModulo" Association="EscolaOnline.Store.CursoModulo">
+      <End Role="Curso" EntitySet="Cursos" />
+      <End Role="Modulo" EntitySet="Modulos" />
+    </AssociationSet>
+    <AssociationSet Name="ModuloAtividade" Association="EscolaOnline.Store.ModuloAtividade">
+      <End Role="Modulo" EntitySet="Modulos" />
+      <End Role="Atividade" EntitySet="Atividades" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Cursos">
     <Key>
@@ -25,6 +33,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Titulo" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Descricao" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CursoId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Atividades">
     <Key>
@@ -32,7 +41,32 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descricao" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ModuloId" Type="int" Nullable="false" />
   </EntityType>
+  <Association Name="CursoModulo">
+    <End Role="Curso" Type="EscolaOnline.Store.Cursos" Multiplicity="1" />
+    <End Role="Modulo" Type="EscolaOnline.Store.Modulos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Curso">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Modulo">
+        <PropertyRef Name="CursoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ModuloAtividade">
+    <End Role="Modulo" Type="EscolaOnline.Store.Modulos" Multiplicity="1" />
+    <End Role="Atividade" Type="EscolaOnline.Store.Atividades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Modulo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Atividade">
+        <PropertyRef Name="ModuloId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -41,6 +75,14 @@
           <EntitySet Name="Cursos" EntityType="EscolaOnline.Curso" />
           <EntitySet Name="Modulos" EntityType="EscolaOnline.Modulo" />
           <EntitySet Name="Atividades" EntityType="EscolaOnline.Atividade" />
+          <AssociationSet Name="CursoModulo" Association="EscolaOnline.CursoModulo">
+            <End Role="Curso" EntitySet="Cursos" />
+            <End Role="Modulo" EntitySet="Modulos" />
+          </AssociationSet>
+          <AssociationSet Name="ModuloAtividade" Association="EscolaOnline.ModuloAtividade">
+            <End Role="Modulo" EntitySet="Modulos" />
+            <End Role="Atividade" EntitySet="Atividades" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Curso">
           <Key>
@@ -49,6 +91,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Titulo" Type="String" Nullable="false" />
           <Property Name="Descricao" Type="String" Nullable="false" />
+          <NavigationProperty Name="Moduloes" Relationship="EscolaOnline.CursoModulo" FromRole="Curso" ToRole="Modulo" />
         </EntityType>
         <EntityType Name="Modulo">
           <Key>
@@ -57,6 +100,9 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Titulo" Type="String" Nullable="false" />
           <Property Name="Descricao" Type="String" Nullable="false" />
+          <NavigationProperty Name="Curso" Relationship="EscolaOnline.CursoModulo" FromRole="Modulo" ToRole="Curso" />
+          <Property Name="CursoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Atividades" Relationship="EscolaOnline.ModuloAtividade" FromRole="Modulo" ToRole="Atividade" />
         </EntityType>
         <EntityType Name="Atividade">
           <Key>
@@ -64,7 +110,33 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descricao" Type="String" Nullable="false" />
+          <NavigationProperty Name="Modulo" Relationship="EscolaOnline.ModuloAtividade" FromRole="Atividade" ToRole="Modulo" />
+          <Property Name="ModuloId" Type="Int32" Nullable="false" />
         </EntityType>
+        <Association Name="CursoModulo">
+          <End Type="EscolaOnline.Curso" Role="Curso" Multiplicity="1" />
+          <End Type="EscolaOnline.Modulo" Role="Modulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Modulo">
+              <PropertyRef Name="CursoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ModuloAtividade">
+          <End Type="EscolaOnline.Modulo" Role="Modulo" Multiplicity="1" />
+          <End Type="EscolaOnline.Atividade" Role="Atividade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modulo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Atividade">
+              <PropertyRef Name="ModuloId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -86,6 +158,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Titulo" ColumnName="Titulo" />
           <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="CursoId" ColumnName="CursoId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -94,6 +167,7 @@
         <MappingFragment StoreEntitySet="Atividades">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="ModuloId" ColumnName="ModuloId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

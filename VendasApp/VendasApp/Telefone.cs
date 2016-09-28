@@ -7,17 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ModelFirst.Model
+namespace VendasApp
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Atividade
+    public partial class Telefone
     {
         public int Id { get; set; }
-        public string Descricao { get; set; }
-        public int ModuloId { get; set; }
+        public string Ddd { get; set; }
+        public string Numero { get; set; }
+        public int ClienteId { get; set; }
     
-        public virtual Modulo Modulo { get; set; }
+        public virtual Cliente Cliente { get; set; }
     }
 }

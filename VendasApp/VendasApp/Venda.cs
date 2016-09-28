@@ -7,24 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ModelFirst.Model
+namespace VendasApp
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Curso
+    public partial class Venda
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Curso()
+        public Venda()
         {
-            this.Moduloes = new HashSet<Modulo>();
+            this.Items = new HashSet<Item>();
         }
     
         public int Id { get; set; }
-        public string Titulo { get; set; }
-        public string Descricao { get; set; }
+        public System.DateTime Data { get; set; }
+        public int ClienteId { get; set; }
     
+        public virtual Cliente Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Modulo> Moduloes { get; set; }
+        public virtual ICollection<Item> Items { get; set; }
     }
 }
