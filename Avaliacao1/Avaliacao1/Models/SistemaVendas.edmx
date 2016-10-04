@@ -1,0 +1,531 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SistemaVendas.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="SistemaVendasStoreContainer">
+    <EntitySet Name="Vendas" EntityType="SistemaVendas.Store.Vendas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Clientes" EntityType="SistemaVendas.Store.Clientes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Lojas" EntityType="SistemaVendas.Store.Lojas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Vendedores" EntityType="SistemaVendas.Store.Vendedores" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Produtos" EntityType="SistemaVendas.Store.Produtos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Categorias" EntityType="SistemaVendas.Store.Categorias" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Items" EntityType="SistemaVendas.Store.Items" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Redes" EntityType="SistemaVendas.Store.Redes" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="VendaItem" Association="SistemaVendas.Store.VendaItem">
+      <End Role="Venda" EntitySet="Vendas" />
+      <End Role="Item" EntitySet="Items" />
+    </AssociationSet>
+    <AssociationSet Name="ProdutoItem" Association="SistemaVendas.Store.ProdutoItem">
+      <End Role="Produto" EntitySet="Produtos" />
+      <End Role="Item" EntitySet="Items" />
+    </AssociationSet>
+    <AssociationSet Name="ClienteVenda" Association="SistemaVendas.Store.ClienteVenda">
+      <End Role="Cliente" EntitySet="Clientes" />
+      <End Role="Venda" EntitySet="Vendas" />
+    </AssociationSet>
+    <AssociationSet Name="VendedorVenda" Association="SistemaVendas.Store.VendedorVenda">
+      <End Role="Vendedor" EntitySet="Vendedores" />
+      <End Role="Venda" EntitySet="Vendas" />
+    </AssociationSet>
+    <AssociationSet Name="LojaVenda" Association="SistemaVendas.Store.LojaVenda">
+      <End Role="Loja" EntitySet="Lojas" />
+      <End Role="Venda" EntitySet="Vendas" />
+    </AssociationSet>
+    <AssociationSet Name="CategoriaCliente" Association="SistemaVendas.Store.CategoriaCliente">
+      <End Role="Categoria" EntitySet="Categorias" />
+      <End Role="Cliente" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="RedeLoja" Association="SistemaVendas.Store.RedeLoja">
+      <End Role="Rede" EntitySet="Redes" />
+      <End Role="Loja" EntitySet="Lojas" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Vendas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Data" Type="datetime" Nullable="false" />
+    <Property Name="ClienteId" Type="int" Nullable="false" />
+    <Property Name="VendedorId" Type="int" Nullable="false" />
+    <Property Name="LojaId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Idade" Type="int" Nullable="false" />
+    <Property Name="Telefone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Cpf" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CategoriaId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Lojas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RazaoSocial" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Cnpj" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Matriz" Type="bit" Nullable="false" />
+    <Property Name="RedeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vendedores">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telefone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Produtos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Descricao" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Preco" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categorias">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Descricao" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Items">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Quantidade" Type="int" Nullable="false" />
+    <Property Name="Preco" Type="float" Nullable="false" />
+    <Property Name="VendaId" Type="int" Nullable="false" />
+    <Property Name="ProdutoId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Redes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RazaoSocial" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Cnpj" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="VendaItem">
+    <End Role="Venda" Type="SistemaVendas.Store.Vendas" Multiplicity="1" />
+    <End Role="Item" Type="SistemaVendas.Store.Items" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venda">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Item">
+        <PropertyRef Name="VendaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProdutoItem">
+    <End Role="Produto" Type="SistemaVendas.Store.Produtos" Multiplicity="1" />
+    <End Role="Item" Type="SistemaVendas.Store.Items" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produto">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Item">
+        <PropertyRef Name="ProdutoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClienteVenda">
+    <End Role="Cliente" Type="SistemaVendas.Store.Clientes" Multiplicity="1" />
+    <End Role="Venda" Type="SistemaVendas.Store.Vendas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Venda">
+        <PropertyRef Name="ClienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="VendedorVenda">
+    <End Role="Vendedor" Type="SistemaVendas.Store.Vendedores" Multiplicity="1" />
+    <End Role="Venda" Type="SistemaVendas.Store.Vendas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendedor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Venda">
+        <PropertyRef Name="VendedorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LojaVenda">
+    <End Role="Loja" Type="SistemaVendas.Store.Lojas" Multiplicity="1" />
+    <End Role="Venda" Type="SistemaVendas.Store.Vendas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Loja">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Venda">
+        <PropertyRef Name="LojaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CategoriaCliente">
+    <End Role="Categoria" Type="SistemaVendas.Store.Categorias" Multiplicity="1" />
+    <End Role="Cliente" Type="SistemaVendas.Store.Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cliente">
+        <PropertyRef Name="CategoriaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RedeLoja">
+    <End Role="Rede" Type="SistemaVendas.Store.Redes" Multiplicity="1" />
+    <End Role="Loja" Type="SistemaVendas.Store.Lojas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rede">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Loja">
+        <PropertyRef Name="RedeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="SistemaVendas" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="SistemaVendasContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Vendas" EntityType="SistemaVendas.Venda" />
+          <EntitySet Name="Clientes" EntityType="SistemaVendas.Cliente" />
+          <EntitySet Name="Lojas" EntityType="SistemaVendas.Loja" />
+          <EntitySet Name="Vendedores" EntityType="SistemaVendas.Vendedor" />
+          <EntitySet Name="Produtos" EntityType="SistemaVendas.Produto" />
+          <EntitySet Name="Categorias" EntityType="SistemaVendas.Categoria" />
+          <EntitySet Name="Items" EntityType="SistemaVendas.Item" />
+          <AssociationSet Name="VendaItem" Association="SistemaVendas.VendaItem">
+            <End Role="Venda" EntitySet="Vendas" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="ProdutoItem" Association="SistemaVendas.ProdutoItem">
+            <End Role="Produto" EntitySet="Produtos" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="ClienteVenda" Association="SistemaVendas.ClienteVenda">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="Venda" EntitySet="Vendas" />
+          </AssociationSet>
+          <AssociationSet Name="VendedorVenda" Association="SistemaVendas.VendedorVenda">
+            <End Role="Vendedor" EntitySet="Vendedores" />
+            <End Role="Venda" EntitySet="Vendas" />
+          </AssociationSet>
+          <AssociationSet Name="LojaVenda" Association="SistemaVendas.LojaVenda">
+            <End Role="Loja" EntitySet="Lojas" />
+            <End Role="Venda" EntitySet="Vendas" />
+          </AssociationSet>
+          <AssociationSet Name="CategoriaCliente" Association="SistemaVendas.CategoriaCliente">
+            <End Role="Categoria" EntitySet="Categorias" />
+            <End Role="Cliente" EntitySet="Clientes" />
+          </AssociationSet>
+          <EntitySet Name="Redes" EntityType="SistemaVendas.Rede" />
+          <AssociationSet Name="RedeLoja" Association="SistemaVendas.RedeLoja">
+            <End Role="Rede" EntitySet="Redes" />
+            <End Role="Loja" EntitySet="Lojas" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Venda">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Data" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Items" Relationship="SistemaVendas.VendaItem" FromRole="Venda" ToRole="Item" />
+          <NavigationProperty Name="Cliente" Relationship="SistemaVendas.ClienteVenda" FromRole="Venda" ToRole="Cliente" />
+          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Vendedor" Relationship="SistemaVendas.VendedorVenda" FromRole="Venda" ToRole="Vendedor" />
+          <Property Name="VendedorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Loja" Relationship="SistemaVendas.LojaVenda" FromRole="Venda" ToRole="Loja" />
+          <Property Name="LojaId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" />
+          <Property Name="Idade" Type="Int32" Nullable="false" />
+          <Property Name="Telefone" Type="String" Nullable="false" />
+          <Property Name="Cpf" Type="String" Nullable="false" />
+          <NavigationProperty Name="Vendas" Relationship="SistemaVendas.ClienteVenda" FromRole="Cliente" ToRole="Venda" />
+          <NavigationProperty Name="Categoria" Relationship="SistemaVendas.CategoriaCliente" FromRole="Cliente" ToRole="Categoria" />
+          <Property Name="CategoriaId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Loja">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RazaoSocial" Type="String" Nullable="false" />
+          <Property Name="Cnpj" Type="String" Nullable="false" />
+          <Property Name="Matriz" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Vendas" Relationship="SistemaVendas.LojaVenda" FromRole="Loja" ToRole="Venda" />
+          <NavigationProperty Name="Rede" Relationship="SistemaVendas.RedeLoja" FromRole="Loja" ToRole="Rede" />
+          <Property Name="RedeId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vendedor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" />
+          <Property Name="Telefone" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <NavigationProperty Name="Vendas" Relationship="SistemaVendas.VendedorVenda" FromRole="Vendedor" ToRole="Venda" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" />
+          <Property Name="Descricao" Type="String" Nullable="false" />
+          <Property Name="Preco" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Items" Relationship="SistemaVendas.ProdutoItem" FromRole="Produto" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" />
+          <Property Name="Descricao" Type="String" Nullable="false" />
+          <NavigationProperty Name="Clientes" Relationship="SistemaVendas.CategoriaCliente" FromRole="Categoria" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantidade" Type="Int32" Nullable="false" />
+          <Property Name="Preco" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Venda" Relationship="SistemaVendas.VendaItem" FromRole="Item" ToRole="Venda" />
+          <Property Name="VendaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Produto" Relationship="SistemaVendas.ProdutoItem" FromRole="Item" ToRole="Produto" />
+          <Property Name="ProdutoId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="VendaItem">
+          <End Type="SistemaVendas.Venda" Role="Venda" Multiplicity="1" />
+          <End Type="SistemaVendas.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venda">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="VendaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProdutoItem">
+          <End Type="SistemaVendas.Produto" Role="Produto" Multiplicity="1" />
+          <End Type="SistemaVendas.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="ProdutoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClienteVenda">
+          <End Type="SistemaVendas.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="SistemaVendas.Venda" Role="Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Venda">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VendedorVenda">
+          <End Type="SistemaVendas.Vendedor" Role="Vendedor" Multiplicity="1" />
+          <End Type="SistemaVendas.Venda" Role="Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Venda">
+              <PropertyRef Name="VendedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LojaVenda">
+          <End Type="SistemaVendas.Loja" Role="Loja" Multiplicity="1" />
+          <End Type="SistemaVendas.Venda" Role="Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Loja">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Venda">
+              <PropertyRef Name="LojaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CategoriaCliente">
+          <End Type="SistemaVendas.Categoria" Role="Categoria" Multiplicity="1" />
+          <End Type="SistemaVendas.Cliente" Role="Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="CategoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Rede">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RazaoSocial" Type="String" Nullable="false" />
+          <Property Name="Cnpj" Type="String" Nullable="false" />
+          <NavigationProperty Name="Lojas" Relationship="SistemaVendas.RedeLoja" FromRole="Rede" ToRole="Loja" />
+        </EntityType>
+        <Association Name="RedeLoja">
+          <End Type="SistemaVendas.Rede" Role="Rede" Multiplicity="1" />
+          <End Type="SistemaVendas.Loja" Role="Loja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rede">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Loja">
+              <PropertyRef Name="RedeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SistemaVendasStoreContainer" CdmEntityContainer="SistemaVendasContainer">
+    <EntitySetMapping Name="Vendas">
+      <EntityTypeMapping TypeName="IsTypeOf(SistemaVendas.Venda)">
+        <MappingFragment StoreEntitySet="Vendas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+          <ScalarProperty Name="VendedorId" ColumnName="VendedorId" />
+          <ScalarProperty Name="LojaId" ColumnName="LojaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clientes">
+      <EntityTypeMapping TypeName="IsTypeOf(SistemaVendas.Cliente)">
+        <MappingFragment StoreEntitySet="Clientes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Idade" ColumnName="Idade" />
+          <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+          <ScalarProperty Name="Cpf" ColumnName="Cpf" />
+          <ScalarProperty Name="CategoriaId" ColumnName="CategoriaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lojas">
+      <EntityTypeMapping TypeName="IsTypeOf(SistemaVendas.Loja)">
+        <MappingFragment StoreEntitySet="Lojas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RazaoSocial" ColumnName="RazaoSocial" />
+          <ScalarProperty Name="Cnpj" ColumnName="Cnpj" />
+          <ScalarProperty Name="Matriz" ColumnName="Matriz" />
+          <ScalarProperty Name="RedeId" ColumnName="RedeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vendedores">
+      <EntityTypeMapping TypeName="IsTypeOf(SistemaVendas.Vendedor)">
+        <MappingFragment StoreEntitySet="Vendedores">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Produtos">
+      <EntityTypeMapping TypeName="IsTypeOf(SistemaVendas.Produto)">
+        <MappingFragment StoreEntitySet="Produtos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="Preco" ColumnName="Preco" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categorias">
+      <EntityTypeMapping TypeName="IsTypeOf(SistemaVendas.Categoria)">
+        <MappingFragment StoreEntitySet="Categorias">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Items">
+      <EntityTypeMapping TypeName="IsTypeOf(SistemaVendas.Item)">
+        <MappingFragment StoreEntitySet="Items">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+          <ScalarProperty Name="Preco" ColumnName="Preco" />
+          <ScalarProperty Name="VendaId" ColumnName="VendaId" />
+          <ScalarProperty Name="ProdutoId" ColumnName="ProdutoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Redes">
+      <EntityTypeMapping TypeName="IsTypeOf(SistemaVendas.Rede)">
+        <MappingFragment StoreEntitySet="Redes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RazaoSocial" ColumnName="RazaoSocial" />
+          <ScalarProperty Name="Cnpj" ColumnName="Cnpj" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

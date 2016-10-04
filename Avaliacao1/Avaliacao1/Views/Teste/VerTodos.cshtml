@@ -1,0 +1,18 @@
+﻿@model List<Avaliacao1.Models.Cliente>
+@{
+    ViewBag.Title = "VerTodos";
+}
+
+<h2>Ver Todos os Clientes</h2>
+
+@foreach (var item in Model) {
+    <hr />
+    <div class="container row">
+        <div class="col col-lg-5">
+            Codigo: @item.Codigo <br />
+            Nome: @item.Nome <br />
+            Email: @item.Email <br />
+            Telefone: @item.Telefone <br />
+        </div>
+    </div>
+}

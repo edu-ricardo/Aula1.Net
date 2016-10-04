@@ -11,9 +11,9 @@
         <AssociationConnector Association="VendasModel.ClienteVenda" />
         <AssociationConnector Association="VendasModel.ClienteTelefone" />
         <EntityTypeShape EntityType="VendasModel.Endereco" Width="1.5" PointX="0.625" PointY="1.75" />
-        <EntityTypeShape EntityType="VendasModel.Produto" Width="1.5" PointX="5.5" PointY="2.625" />
+        <EntityTypeShape EntityType="VendasModel.Produto" Width="1.5" PointX="5.5" PointY="3.25" />
         <EntityTypeShape EntityType="VendasModel.Categoria" Width="1.5" PointX="3" PointY="2.625" />
-        <EntityTypeShape EntityType="VendasModel.Item" Width="1.5" PointX="8.5" PointY="2.875" />
+        <EntityTypeShape EntityType="VendasModel.Item" Width="1.5" PointX="8.5" PointY="3.5" />
         <AssociationConnector Association="VendasModel.ClienteEndereco" />
         <AssociationConnector Association="VendasModel.CategoriaProduto" />
         <AssociationConnector Association="VendasModel.ProdutoItem" />
